@@ -1,3 +1,7 @@
+#**VERSION**
+This is a revision of Alex St Clair's MCB Code to run on the new RACHuTS MonDo Board.   Functionality is identical with a small fix to the docking logic.  This code expectst the Technosoft Controllers to be flashed with RACHuTS_V6_EmCamVariable_MonDo code.
+
+
 # MCB
 
 This repository contains the Motor Control Board (MCB) software for LASP [Stratéole 2](https://strat2.org/) reeldown instruments (RACHuTS and FLOATS). It is structured as an Arduino library for the Teensy 3.6 Arduino-compatible board based on an ARM Cortex-M4 microcontroller. On RACHuTS, the MCB is the secondary computer to the Profiler Interface Board (PIB), the software for which is maintained in [StratoPIB](https://github.com/dastcvi/StratoPIB). On FLOATS, the MCB is a secondary computer to the Data Interface Board (DIB), maintained in [StratoDIB](https://github.com/dastcvi/StratoDIB). *Note that after the engineering flight, the MCB and DIB/PIB were combined electrically into one standard PCB (named the Monitoring and Doing board, or MonDo), but the MCB, PIB, and DIB software have remained separate and largely unaltered by this change*.
