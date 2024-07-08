@@ -1,5 +1,5 @@
 #**VERSION**
-This is a revision of Alex St Clair's MCB Code to run on the new RACHuTS MonDo Board.   Functionality is identical with a small fix to the docking logic.  This code expectst the Technosoft Controllers to be flashed with RACHuTS_V6_EmCamVariable_MonDo code.
+This is a revision of Alex St Clair's MCB Code to run on the new RACHuTS MonDo Board updated for using Teensy 4.1 microcontrollers.   Functionality is identical with a small fix to the docking logic.  This code expectst the Technosoft Controllers to be flashed with RACHuTS_V6_EmCamVariable_MonDo code.
 
 
 # MCB
