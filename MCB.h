@@ -15,7 +15,7 @@
 #ifndef MCB_H_
 #define MCB_H_
 
-#include "MCBBufferGuard.h"
+//#include "MCBBufferGuard.h"
 #include "InternalSerialDriverMCB.h"
 //#include "LTC2983Manager.h"
 #include "PowerControllerMCB.h"
@@ -29,6 +29,8 @@
 #include <String.h>
 #include <StdInt.h>
 #include <StdLib.h>
+#include <TimeLib.h>
+#include <Watchdog_t4.h>
 
 #define ENTRY_SUBSTATE	0
 #define EXIT_SUBSTATE	1

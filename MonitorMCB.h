@@ -125,8 +125,7 @@ public:
         /* last_volt | limit_hi | limit_lo | volt_div | last_raw | channel_pin   | over_volt | under_volt */
         {{ 0.0f,       3.8f,      2.6f,      0.5f,      0,         A_VMON_3V3,     false,      false},
          { 0.0f,       20.0f,     12.0f,     0.102f,    0,         A_VMON_15V,     false,      false},
-         { 0.0f,       26.0f,     18.0f,     0.0746f,   0,         A_VMON_20V,     false,      false},
-         { 0.0f,       3.6f,      0.0f,      1,         0,         A_SPOOL_LEVEL,  false,      false}};
+         { 0.0f,       26.0f,     18.0f,     0.0746f,   0,         A_VMON_20V,     false,      false}};
 
     // current ADC channel table (hard-coded limits will be replaced at init from EEPROM)
     ADC_Current_t imon_channels[NUM_IMON_CHANNELS] =
@@ -191,8 +190,8 @@ private:
     TSensor1Bus tempC_MTR1;
     TSensor1Bus tempC_MTR2;
     TSensor1Bus tempC_MC1;
-    TSensor1Bus tempC_SPARE1;
-    TSensor1Bus tempC_SPARE2;
+   // TSensor1Bus tempC_SPARE1;
+   // TSensor1Bus tempC_SPARE2;
 
 
     // motion data buffer for sending to the DIB/PIB

@@ -13,8 +13,8 @@ MonitorMCB::MonitorMCB(SafeBuffer * monitor_q, SafeBuffer * action_q, Reel * ree
     , tempC_MTR1(MTR1_THERM_CH)
     , tempC_MTR2(MTR2_THERM_CH)
     , tempC_MC1(MC1_THERM_CH)
-    , tempC_SPARE1(SPARE1_THERM_CH)
-    , tempC_SPARE2(SPARE2_THERM_CH)
+  //  , tempC_SPARE1(SPARE1_THERM_CH)
+  //  , tempC_SPARE2(SPARE2_THERM_CH)
     
     //: ltcManager(LTC_TEMP_CS_PIN, LTC_TEMP_RESET_PIN, THERM_SENSE_CH, RTD_SENSE_CH)
     //, storageManager()
@@ -76,10 +76,10 @@ void MonitorMCB::UpdateLimits(void)
     temp_sensors[MTR2_THERM].limit_lo = configManager->mtr2_temp_lim.Read().lo;
     temp_sensors[MC1_THERM].limit_hi = configManager->mc1_temp_lim.Read().hi;
     temp_sensors[MC1_THERM].limit_lo = configManager->mc1_temp_lim.Read().lo;
-    temp_sensors[SPARE1_THERM].limit_hi = configManager->mc2_temp_lim.Read().hi;
-    temp_sensors[SPARE1_THERM].limit_lo = configManager->mc2_temp_lim.Read().lo;
-    temp_sensors[SPARE2_THERM].limit_hi = configManager->dcdc_temp_lim.Read().hi;
-    temp_sensors[SPARE2_THERM].limit_lo = configManager->dcdc_temp_lim.Read().lo;
+    //temp_sensors[SPARE1_THERM].limit_hi = configManager->mc2_temp_lim.Read().hi;
+    //temp_sensors[SPARE1_THERM].limit_lo = configManager->mc2_temp_lim.Read().lo;
+    //temp_sensors[SPARE2_THERM].limit_hi = configManager->dcdc_temp_lim.Read().hi;
+    //temp_sensors[SPARE2_THERM].limit_lo = configManager->dcdc_temp_lim.Read().lo;
     //temp_sensors[SPARE_THERM].limit_hi = configManager->spare_therm_lim.Read().hi;
     //temp_sensors[SPARE_THERM].limit_lo = configManager->spare_therm_lim.Read().lo;
 

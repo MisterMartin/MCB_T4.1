@@ -3,9 +3,11 @@
  *  File implementing the MCB state manager
  *  Author: Alex St. Clair
  *  February 2018
+ * Updated for T4.1 by LEK 7/2024
  */
 
 #include "MCB.h"
+WDT_T4<WDT1> wdt;  // Use Watchdog Timer1 on Teensy 4.1
 
 // --------------------------------------------------------
 // Constructor
@@ -119,34 +121,21 @@ bool MCB::SetState(MCB_States_t new_state)
 // initialize the watchdog using the 1kHz LPO clock source to achieve a 10s WDOG
 void MCB::InitializeWatchdog()
 {
-    if ((RCM_SRS0 & RCM_SRS0_WDOG) != 0) {
-        dibDriver.dibComm.TX_Error("MCB reset caused by watchdog");
-    }
-
-    noInterrupts(); // disable interrupts
-
-    // unlock
-    WDOG_UNLOCK = WDOG_UNLOCK_SEQ1; // unlock access to WDOG registers
-    WDOG_UNLOCK = WDOG_UNLOCK_SEQ2;
-    delayMicroseconds(1);
-
-    WDOG_PRESC = 0; // no prescaling of clock
-
-    WDOG_TOVALH = 0x0000; // upper bits set to 0
-    WDOG_TOVALL = 0x2710; // 10000 counter at 1 kHz => 10s WDOG period
-
-    // in one write, enable the watchdog using the 1kHz LPO clock source
-    WDOG_STCTRLH = 0x01D1;
-
-    interrupts(); // enable interrupts
+    WDT_timings_t config;
+    //config.trigger = 5; /* in seconds, 0->128 for watchdog warning */
+    config.timeout = 10; /* in seconds, 0->128 for watchdog reboot */
+    //config.callback = myCallback;
+    wdt.begin(config);
+  
+    if (wdt.expired()) {
+          dibDriver.dibComm.TX_Error("Reset caused by watchdog");
+     }
+   
 }
 
 void MCB::KickWatchdog()
 {
-    noInterrupts();
-    WDOG_REFRESH = 0xA602;
-    WDOG_REFRESH = 0xB480;
-    interrupts();
+    wdt.feed();
 }
 
 // --------------------------------------------------------
@@ -509,7 +498,7 @@ bool MCB::ReelControllerOn(void)
 	powerController.ReelOn();
 
 	// wait for boot
-	delay(500);
+	delay(1000);
 
 	// attempt communication
 	if (!reel.Sync()) {
@@ -520,7 +509,7 @@ bool MCB::ReelControllerOn(void)
 		return false;
 	}
 
-	// attempt to increase the baud rate
+	//attempt to increase the baud rate
 	// if (!reel.UpdateBaudRate(B115200)) {
 	// 	powerController.ReelOff();
 	// 	action_queue.Push(ACT_SWITCH_READY);
@@ -530,6 +519,8 @@ bool MCB::ReelControllerOn(void)
 	// }
 
 	// start the drive control loops
+	delay(500);
+
 	if (!reel.SendEndInit() || !reel.SetAxisOn()) {
 		powerController.ReelOff();
 		action_queue.Push(ACT_SWITCH_READY);
